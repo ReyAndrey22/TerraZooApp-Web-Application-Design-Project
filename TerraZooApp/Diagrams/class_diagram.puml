@@ -1,0 +1,161 @@
+@startuml TerraZoo Class Diagram
+
+' Styling
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Black
+}
+
+' Main Entity Classes
+class Users {
+    +string Id
+    +string UserName
+    +string Email
+    +string FirstName
+    +string LastName
+    +string Role
+    +string ProfilePicture
+    +IFormFile ProfilePictureFile
+    +ICollection<Review> Reviews
+    +ICollection<Ticket> Tickets
+    +ICollection<Tour> Tours
+    +ICollection<TourGuideSchedule> Schedules
+    +Login()
+    +Register()
+    +Logout()
+    +ViewProfile()
+    +UpdateProfile()
+}
+
+class Animal {
+    +int IdAnimal
+    +string NameAnimal
+    +string Species
+    +string ScientificName
+    +string Breed
+    +string Sex
+    +int Age
+    +string NaturalHabitat
+    +string DietType
+    +string ImageAnimal
+    +IFormFile ImageAnimalFile
+    +ICollection<Review> Reviews
+    +IndexAnimal()
+    +AddAnimal()
+    +UpdateAnimal()
+    +DeleteAnimal()
+    +ListAnimals()
+}
+
+class Tour {
+    +int IdTour
+    +string Title
+    +DateOnly DateTour
+    +TimeOnly StartHour
+    +TimeOnly EndHour
+    +int NumberOfSpots
+    +int Duration
+    +string Description
+    +string UserId
+    +Users User
+    +ICollection<Ticket> Tickets
+    +Index()
+    +Details()
+    +Create()
+    +Edit()
+    +Delete()
+}
+
+class Ticket {
+    +int IdTicket
+    +DateOnly PurchaseDate
+    +string UserId
+    +int? IdTour
+    +int IdTicketType
+    +Users User
+    +Tour Tour
+    +TicketType TicketType
+    +BuyTickets()
+    +PurchaseTicket()
+    +ReserveTour()
+    +MyTickets()
+}
+
+class TicketType {
+    +int IdTicketType
+    +string NameTicketType
+    +decimal Price
+    +ICollection<Ticket> Tickets
+    +Index()
+    +Create()
+    +Edit()
+}
+
+class Review {
+    +int IdReview
+    +int Rating
+    +string Comment
+    +DateOnly DateReview
+    +string UserId
+    +int? IdAnimal
+    +Users User
+    +Animal Animal
+    +ListByAnimal()
+    +Add()
+}
+
+class Employee {
+    +int IdEmployee
+    +string FirstName
+    +string LastName
+    +string Email
+    +string Phone
+    +string Address
+    +DateOnly HireDate
+    +decimal Salary
+    +string Position
+    +IndexEmployee()
+    +AddEmployee()
+    +UpdateEmployee()
+    +DeleteEmployee()
+    +ListEmployees()
+}
+
+class TourGuideSchedule {
+    +int IdTourGuideSchedule
+    +string DayOfWeek
+    +TimeOnly StartHour
+    +TimeOnly EndHour
+    +string UserId
+    +Users User
+    +Index()
+    +Create()
+    +Edit()
+}
+
+class TerraZooSchedule {
+    +int IdTerraZooSchedule
+    +string DayOfWeek
+    +TimeOnly OpeningHour
+    +TimeOnly ClosingHour
+    +IndexTerraZooSchedule()
+    +AddTerraZooSchedule()
+    +UpdateTerraZooSchedule()
+}
+
+' Relationships
+Users "1" -- "many" Review : has >
+Users "1" -- "many" Ticket : owns >
+Users "1" -- "many" Tour : guides >
+Users "1" -- "many" TourGuideSchedule : has >
+
+Animal "1" -- "many" Review : receives >
+
+Tour "1" -- "many" Ticket : includes >
+Tour "many" -- "1" Users : guided by >
+
+Ticket "many" -- "1" TicketType : is of type >
+
+@enduml 

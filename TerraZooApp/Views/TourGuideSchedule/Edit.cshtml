@@ -1,0 +1,55 @@
+@model TerraZooApp.Models.TourGuideSchedule
+@{
+    ViewData["Title"] = "Edit Schedule";
+    Layout = "_TourGuideLayout";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdTourGuideSchedule" />
+                <input type="hidden" asp-for="UserId" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="DayOfWeek" class="control-label">Day of the Week</label>
+                    <select asp-for="DayOfWeek" class="form-control">
+                        <option value="">Select day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <span asp-validation-for="DayOfWeek" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="StartHour" class="control-label">Start Hour</label>
+                    <input asp-for="StartHour" class="form-control" type="time" />
+                    <span asp-validation-for="StartHour" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="EndHour" class="control-label">End Hour</label>
+                    <input asp-for="EndHour" class="form-control" type="time" />
+                    <span asp-validation-for="EndHour" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-action="Index" asp-route-userId="@Model.UserId" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

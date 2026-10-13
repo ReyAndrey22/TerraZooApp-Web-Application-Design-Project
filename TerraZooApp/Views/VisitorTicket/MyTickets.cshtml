@@ -1,0 +1,121 @@
+@model IEnumerable<TerraZooApp.Models.Ticket>
+@{
+    ViewData["Title"] = "My Tickets";
+    Layout = "_VisitorLayout";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">My Tickets</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You haven't purchased any tickets yet. <a asp-action="BuyTickets" class="alert-link">Buy Tickets</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var ticket in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                @if (ticket.Tour != null)
+                                {
+                                    @ticket.Tour.Title
+                                }
+                                else
+                                {
+                                    <span>No Tour Reserved Yet</span>
+                                }
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Ticket Type:</strong> @ticket.TicketType?.NameTicketType</p>
+                            <p><strong>Price:</strong> @ticket.TicketType?.Price RON</p>
+                            @if (ticket.Tour != null)
+                            {
+                                <p><strong>Tour Date:</strong> @ticket.Tour.DateTour.ToString("dd/MM/yyyy")</p>
+                                <p><strong>Tour Time:</strong> @ticket.Tour.StartHour.ToString("HH:mm")</p>
+                            }
+                            <p><strong>Purchase Date:</strong> @ticket.PurchaseDate.ToString("dd/MM/yyyy")</p>
+
+                            @if (ticket.IdTour == null)
+                            {
+                                <button type="button" class="btn btn-success mt-2 reserve-tour-btn" data-bs-toggle="modal" data-bs-target="#reserveTourModal" data-ticket-id="@ticket.IdTicket">
+                                    Reserve Tour
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="mt-4">
+        <a asp-action="BuyTickets" class="btn btn-primary">Buy New Tickets</a>
+    </div>
+</div>
+
+<!-- Reserve Tour Modal -->
+<div class="modal fade" id="reserveTourModal" tabindex="-1" aria-labelledby="reserveTourModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reserveTourModalLabel">Reserve a Tour</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="ReserveTour" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="ticketIdInput" name="ticketId" value="" />
+                    <div class="form-group">
+                        <label for="tourId">Select a Tour:</label>
+                        <select name="tourId" id="tourId" class="form-control" required>
+                            <option value="">Choose an available tour</option>
+                            @foreach (var tour in ViewBag.AvailableTours)
+                            {
+                                <option value="@tour.IdTour">
+                                    @tour.Title - @tour.DateTour.ToString("dd/MM/yyyy") @tour.StartHour.ToString("HH:mm") (@tour.NumberOfSpots spots left)
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Reserve Tour</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var reserveTourModal = document.getElementById('reserveTourModal');
+            reserveTourModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var ticketId = button.getAttribute('data-ticket-id');
+                var modalTicketIdInput = reserveTourModal.querySelector('#ticketIdInput');
+                modalTicketIdInput.value = ticketId;
+            });
+        });
+    </script>
+} 

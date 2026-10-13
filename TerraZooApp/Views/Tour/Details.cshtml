@@ -1,0 +1,29 @@
+@model TerraZooApp.Models.Tour
+@{
+    ViewData["Title"] = "Detalii Tur";
+    Layout = "_TourGuideLayout";
+}
+<h2>@ViewData["Title"]</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Titlu</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+            <dt class="col-sm-3">Data</dt>
+            <dd class="col-sm-9">@Model.DateTour.ToString("dd.MM.yyyy")</dd>
+            <dt class="col-sm-3">Start hour</dt>
+            <dd class="col-sm-9">@Model.StartHour</dd>
+            <dt class="col-sm-3">End hour</dt>
+            <dd class="col-sm-9">@Model.EndHour</dd>
+            <dt class="col-sm-3">Locuri</dt>
+            <dd class="col-sm-9">@Model.NumberOfSpots</dd>
+            <dt class="col-sm-3">Durata (min)</dt>
+            <dd class="col-sm-9">@Model.Duration</dd>
+            <dt class="col-sm-3">Descriere</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+        </dl>
+        <a asp-action="Edit" asp-route-id="@Model.IdTour" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to list</a>
+    </div>
+</div> 

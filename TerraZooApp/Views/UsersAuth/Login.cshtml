@@ -1,0 +1,38 @@
+﻿@model TerraZooApp.Models.Users
+@{
+    ViewData["Title"] = "Login";
+    Layout = "UsersAuthLayout";
+}
+
+<h2 class="text-center mt-4">Login</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["SuccessMessage"]</div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger text-center">@ViewBag.Error</div>
+}
+
+<form asp-action="Login" method="post" class="form-box">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" name="password" type="password" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+
+    <div class="text-center mt-2">
+        <a asp-action="Register">Don't have an account? Register here</a>
+    </div>
+</form>

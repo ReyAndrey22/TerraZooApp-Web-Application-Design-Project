@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_VisitorLayout.cshtml";
+}
+
+<div class="hero-section text-center py-5 mb-5" style="background: linear-gradient(rgba(2,40,0,0.5), rgba(2,40,0,0.5)); background-size: cover; background-position: center; color: white; border-radius: 15px;">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Welcome to TerraZoo</h1>
+        <p class="lead mb-4">Discover the fascinating world of animals in an unforgettable experience</p>
+        <a href="@Url.Action("ListAnimals", "Animal")" class="btn btn-success btn-lg">Explore Animals</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-clock fa-3x text-success mb-3"></i>
+                    <h3 class="card-title">Visiting Hours</h3>
+                    <p class="card-text">Open daily from 9:00 AM to 6:00 PM</p>
+                    <a href="@Url.Action("ViewTerraZooSchedule", "Visitor")" class="btn btn-outline-success">View TerraZoo schedule</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-ticket-alt fa-3x text-success mb-3"></i>
+                    <h3 class="card-title">Tickets</h3>
+                    <p class="card-text">Affordable prices for the whole family</p>
+                    <a href="@Url.Action("BuyTickets","VisitorTicket")" class="btn btn-outline-success">Buy tickets</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Special Attractions</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="~/images/images_visitor/dolphin-show.jpg" class="card-img-top" alt="Show de Delfini">
+                        <div class="card-body">
+                            <h4 class="card-title">Dolphin Show</h4>
+                            <p class="card-text">Daily show at 2:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="~/images/images_visitor/poza-safari.jpg" class="card-img-top" alt="Zona Safari">
+                        <div class="card-body">
+                            <h4 class="card-title">Safari Zone</h4>
+                            <p class="card-text">Unique experience with wild animals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

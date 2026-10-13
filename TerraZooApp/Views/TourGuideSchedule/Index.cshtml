@@ -1,0 +1,64 @@
+@model IEnumerable<TerraZooApp.Models.TourGuideSchedule>
+@{
+    ViewData["Title"] = "My Schedule";
+    Layout = "_TourGuideLayout";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            @if (ViewBag.TargetUser != null)
+            {
+                <span>Schedule for @ViewBag.TargetUser.FirstName @ViewBag.TargetUser.LastName</span>
+            }
+            else
+            {
+                <span>@ViewData["Title"]</span>
+            }
+        </h2>
+        @if (User.IsInRole("admin"))
+        {
+            <a asp-action="Create" asp-route-userId="@ViewBag.TargetUser?.Id" class="btn btn-primary">Add New Schedule</a>
+        }
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">My Schedule</h5>
+        </div>
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <p class="text-muted">No schedule set. Add a new schedule to get started.</p>
+            }
+            else
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var schedule in Model)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                <strong>@schedule.DayOfWeek:</strong> <i class="fas fa-clock"></i> @schedule.StartHour.ToString("HH:mm") - @schedule.EndHour.ToString("HH:mm")
+                            </span>
+                            @if (User.IsInRole("admin"))
+                            {
+                                <span>
+                                    <a asp-action="Edit" asp-route-id="@schedule.IdTourGuideSchedule" class="btn btn-warning btn-sm">Edit</a>
+                                    <form asp-action="Delete" asp-route-id="@schedule.IdTourGuideSchedule" method="post" style="display: inline;">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this schedule?')">Delete</button>
+                                    </form>
+                                </span>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div> 

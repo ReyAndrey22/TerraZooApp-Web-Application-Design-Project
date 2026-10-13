@@ -1,0 +1,18 @@
+﻿@model TerraZooApp.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete Employee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete Employee</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.FirstName @Model.LastName</strong>?
+</div>
+
+<form asp-action="DeleteEmployee">
+    <input type="hidden" asp-for="IdEmployee" />
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a asp-action="IndexEmployee" class="btn btn-secondary">Cancel</a>
+</form>

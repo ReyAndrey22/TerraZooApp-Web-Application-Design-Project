@@ -1,0 +1,53 @@
+@model IEnumerable<TerraZooApp.Models.Tour>
+@{
+    ViewData["Title"] = "Lista Tururi";
+    Layout = "_TourGuideLayout";
+}
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create new tour</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Start hour</th>
+            <th>End hour</th>
+            <th>Number of spots</th>
+            <th>Duration (min)</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.DateTour.ToString("dd.MM.yyyy")</td>
+            <td>@item.StartHour</td>
+            <td>@item.EndHour</td>
+            <td>@item.NumberOfSpots</td>
+            <td>@item.Duration</td>
+		    <td>@item.Description</td>
+            <td>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.IdTour">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.IdTour">Delete</a>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table> 

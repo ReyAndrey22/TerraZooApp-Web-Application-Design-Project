@@ -1,0 +1,31 @@
+@model TerraZooApp.Models.Tour
+@{
+    ViewData["Title"] = "Delete Tour";
+	Layout = "_TourGuideLayout";
+}
+<h2>@ViewData["Title"]</h2>
+
+<h3>Are you sure you want to delete this tour?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Title</dt>
+        <dd class="col-sm-9">@Model.Title</dd>
+        <dt class="col-sm-3">Date</dt>
+        <dd class="col-sm-9">@Model.DateTour.ToString("dd.MM.yyyy")</dd>
+        <dt class="col-sm-3">Start hour</dt>
+        <dd class="col-sm-9">@Model.StartHour</dd>
+        <dt class="col-sm-3">End hour</dt>
+        <dd class="col-sm-9">@Model.EndHour</dd>
+        <dt class="col-sm-3">Number of spots</dt>
+        <dd class="col-sm-9">@Model.NumberOfSpots</dd>
+        <dt class="col-sm-3">Duration (min)</dt>
+        <dd class="col-sm-9">@Model.Duration</dd>
+        <dt class="col-sm-3">Descriere</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+    </dl>
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="IdTour" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </form>
+</div> 

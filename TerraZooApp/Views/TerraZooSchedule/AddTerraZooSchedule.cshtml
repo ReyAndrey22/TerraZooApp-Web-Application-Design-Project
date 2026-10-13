@@ -1,0 +1,37 @@
+﻿@model TerraZooApp.Models.TerraZooSchedule
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Add New TerraZoo Schedule</h2>
+
+<form asp-action="AddTerraZooSchedule" method="post" class="mt-4">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Day of Week</th>
+                <td>
+                    <input asp-for="DayOfWeek" class="form-control" />
+                    <span asp-validation-for="DayOfWeek" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Opening Hour</th>
+                <td>
+                    <input asp-for="OpeningHour" type="time" class="form-control" />
+                    <span asp-validation-for="OpeningHour" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Closing Hour</th>
+                <td>
+                    <input asp-for="ClosingHour" type="time" class="form-control" />
+                    <span asp-validation-for="ClosingHour" class="text-danger"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="IndexTerraZooSchedule" class="btn btn-secondary">Cancel</a>
+</form>

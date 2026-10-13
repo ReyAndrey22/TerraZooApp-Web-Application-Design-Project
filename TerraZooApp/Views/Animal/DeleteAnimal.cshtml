@@ -1,0 +1,14 @@
+﻿@model TerraZooApp.Models.Animal
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete Animal</h2>
+<p>Are you sure you want to delete <strong>@Model.NameAnimal</strong>?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="IdAnimal" />
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a href="@Url.Action("IndexAnimal")" class="btn btn-secondary">Cancel</a>
+</form>

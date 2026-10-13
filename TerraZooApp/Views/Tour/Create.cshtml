@@ -1,0 +1,46 @@
+@model TerraZooApp.Models.Tour
+@{
+    ViewData["Title"] = "Add New Tour";
+    Layout = "_TourGuideLayout";
+}
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label">Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateTour" class="control-label">Date</label>
+        <input asp-for="DateTour" class="form-control" type="date" />
+        <span asp-validation-for="DateTour" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartHour" class="control-label">Start hour</label>
+        <input asp-for="StartHour" class="form-control" type="time" />
+        <span asp-validation-for="StartHour" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EndHour" class="control-label">End hour</label>
+        <input asp-for="EndHour" class="form-control" type="time" />
+        <span asp-validation-for="EndHour" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfSpots" class="control-label">Number of spots</label>
+        <input asp-for="NumberOfSpots" class="form-control" />
+        <span asp-validation-for="NumberOfSpots" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Duration" class="control-label">Duration (min)</label>
+        <input asp-for="Duration" class="form-control" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form> 

@@ -1,0 +1,35 @@
+@{
+    Layout = "_VisitorLayout";
+}
+@model TerraZooApp.Models.Review
+@{
+    ViewData["Title"] = "Add Review";
+    var animal = ViewBag.Animal as TerraZooApp.Models.Animal;
+}
+<div class="container mt-4">
+    <h2>Add Review for @animal?.NameAnimal</h2>
+    <form asp-action="Add" method="post">
+        <input type="hidden" asp-for="IdAnimal" />
+        <div class="mb-3">
+            <label asp-for="Rating" class="form-label">Rating</label>
+            <select asp-for="Rating" class="form-select" required>
+                <option value="">Select rating</option>
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <span asp-validation-for="Rating" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Comment" class="form-label">Comment</label>
+            <textarea asp-for="Comment" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Comment" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-success">Submit Review</button>
+        <a asp-action="ListByAnimal" asp-route-animalId="@animal?.IdAnimal" class="btn btn-secondary ms-2">Back to Reviews</a>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

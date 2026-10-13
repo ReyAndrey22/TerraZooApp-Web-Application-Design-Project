@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TerraZooApp.Models.Animal>
+
+@{
+    ViewData["Title"] = "Animale";
+    Layout = "~/Views/Shared/_VisitorLayout.cshtml";
+}
+
+<div class="container py-5">
+    <h1 class="text-center mb-5">Animalele Noastre</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var animal in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    @if (!string.IsNullOrEmpty(animal.ImageAnimal))
+                    {
+                        <img src="~/images/animals/@animal.ImageAnimal" class="card-img-top" alt="@animal.NameAnimal" style="height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="fas fa-paw fa-3x text-muted"></i>
+                        </div>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@animal.NameAnimal</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@animal.Species</h6>
+                        <p class="card-text">
+                            <small class="text-muted">@animal.ScientificName</small>
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-venus-mars text-primary me-2"></i>@animal.Sex</li>
+                            <li><i class="fas fa-birthday-cake text-success me-2"></i>@animal.Age ani</li>
+                            <li><i class="fas fa-globe-americas text-info me-2"></i>@animal.NaturalHabitat</li>
+                            <li><i class="fas fa-utensils text-warning me-2"></i>@animal.DietType</li>
+                        </ul>
+                        <a href="@Url.Action("ListByAnimal", "Review", new { animalId = animal.IdAnimal })" class="btn btn-outline-primary w-100 mt-2">
+                            <i class="fas fa-star"></i> Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

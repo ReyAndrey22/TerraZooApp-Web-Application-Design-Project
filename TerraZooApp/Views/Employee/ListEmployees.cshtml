@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TerraZooApp.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>List Employees</h2>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Hire Date</th>
+            <th>Salary</th>
+            <th>Role</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.IdEmployee</td>
+                <td>@emp.FirstName</td>
+                <td>@emp.LastName</td>
+                <td>@emp.Email</td>
+                <td>@emp.Phone</td>
+                <td>@emp.Address</td>
+                <td>@emp.HireDate</td>
+                <td>@emp.Salary</td>
+                <td>@emp.Position</td>
+             
+            </tr>
+        }
+    </tbody>
+</table>

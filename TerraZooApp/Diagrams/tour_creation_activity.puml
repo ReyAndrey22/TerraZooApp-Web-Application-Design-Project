@@ -1,0 +1,55 @@
+@startuml
+title Tour Creation Activity Diagram
+
+|Tour Guide|
+start
+:Access Dashboard;
+
+|System|
+:Display Tour Creation Form;
+
+|Tour Guide|
+:Fill Tour Details;
+note right
+  - Title
+  - Date
+  - Start Hour
+  - End Hour
+  - Number of Spots
+  - Duration
+  - Description
+end note
+
+|System|
+:Validate Tour Data;
+
+if (Data Valid?) then (yes)
+  :Check Guide Availability;
+  if (Guide Available?) then (yes)
+    :Create Tour;
+    :Save Tour Details;
+    :Update Guide Schedule;
+    |Tour Guide|
+    :View Success Message;
+    :Tour Created Successfully;
+  else (no)
+    |Tour Guide|
+    :View Error Message;
+    :Guide Not Available;
+  endif
+else (no)
+  |Tour Guide|
+  :View Validation Errors;
+  :Correct Form Data;
+  backward:Fill Tour Details;
+endif
+
+|System|
+:Update Tour List;
+
+|Tour Guide|
+:View Updated Tour List;
+
+stop
+
+@enduml 
